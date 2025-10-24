@@ -12,3 +12,4 @@ C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\refint\minesweepe
 C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.pdb
 C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.genruntimeconfig.cache
 C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\ref\minesweeper.dll
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.sourcelink.json

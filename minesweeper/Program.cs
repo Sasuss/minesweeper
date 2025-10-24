@@ -4,11 +4,9 @@ int mines = 20;
 
 string[,] field = new string[size, size];
 Random rnd = new Random();
-/*
-static void FinalField()
+
+static void FinalField(int size, string[,] field)
 {
-    int size = 10;
-    string[,] field = new string[size, size]; // ts gurt yo
     for (int a = 0; a < size; a++)
     {
         // NUMBERS
@@ -27,9 +25,9 @@ static void FinalField()
 
         for (int b = 0; b < size; b++)
         {
-            if (field[a, b] == "*" && (cor[0] != a && cor[1] != b))
+            if (field[a, b] != "*")
             {
-                Console.Write(". ");
+                Console.Write("  ");
             }
             else
             {
@@ -40,8 +38,8 @@ static void FinalField()
         Console.WriteLine();
     }
 }
-*/
 
+/// PLACING MINES
 for (int m = 0; m < mines; m++)
 {
     int x = rnd.Next(0, size);
@@ -55,20 +53,25 @@ for (int m = 0; m < mines; m++)
         m--;
     }
 }
-while (true)
-{
-    for (int i = 0; i < size; i++)
-    {
-        for (int j = 0; j < size; j++)
-        {
 
-            if (field[i, j] != "*")
-            {
-                field[i, j] = ".";
-            }
+/// FILL THE REST WITH DOTS
+for (int i = 0; i < size; i++)
+{
+    for (int j = 0; j < size; j++)
+    {
+
+        if (field[i, j] != "*")
+        {
+            field[i, j] = ".";
         }
     }
+}
 
+
+while (true)
+{
+
+    /// PLAYING FIELD
     for (int a = 0; a < size; a++)
     {
         // NUMBERS
@@ -99,7 +102,7 @@ while (true)
         }
         Console.WriteLine();
     }
-
+    /// TESTING FIELD
     for (int a = 0; a < size; a++)
     {
         if (a == 0)
@@ -119,67 +122,44 @@ while (true)
         Console.WriteLine();
     }
 
-    Console.Write("Zadej číslo a sloupec (form. sloupec řádek): ");
-
-    string corStr = Console.ReadLine();
-    string[] parts = corStr.Split(' ');
-
-    try
+    /// handling the input
+    while (true)
     {
-        cor = Array.ConvertAll(parts, int.Parse);
-    }
+        Console.Write("Zadej číslo a sloupec (form. sloupec řádek): ");
+        string corStr = Console.ReadLine();
+        string[] parts = corStr.Split(' ');
 
-    catch (Exception e)
-    {
-        Console.WriteLine("Neplatný vstup. Ujisti se, že zadáváš dvě čísla oddělená mezerou.");
-        Console.WriteLine("Chyba: " + e);
-    }
-
-}
-
-
-/*
-while (true)
-{
-    for (int a = 0; a < 10; a++)
-    {
-
-        if (a == 0)
+        if (parts.Length != 2)
         {
-            Console.Write(" ");
-            for (int b = 0; b < 10; b++)
+            Console.WriteLine("Neplatný vstup. Zadej dvě čísla oddělená mezerou.");
+            continue;
+        }
+
+        try
+        {
+            cor = Array.ConvertAll(parts, int.Parse);
+
+            if (cor[0] < 0 || cor[0] >= size || cor[1] < 0 || cor[1] >= size)
             {
-                Console.Write(" " + b);
+                Console.WriteLine("Souřadnice mimo rozsah pole. Zkus to znovu.");
+                continue;
             }
-            Console.WriteLine();
+
+            break;
         }
-
-        Console.Write(a + " ");
-
-        for (int b = 0; b < 10; b++)
+        catch
         {
-            Console.Write(". ");
+            Console.WriteLine("Neplatný vstup. Zadej dvě celá čísla oddělená mezerou.");
         }
-        Console.WriteLine();
     }
+    ///
 
-    Console.Write("Zadej číslo a sloupec: ");
 
-    string corStr = Console.ReadLine();
-    string[] parts = corStr.Split(' ');
 
-    try
+    if (field[cor[0], cor[1]] == "*")
     {
-        int[] cor = Array.ConvertAll(parts, int.Parse);
+        Console.WriteLine("Prohrál jsi!");
+        FinalField(size, field);
+        break;
     }
-
-    catch (Exception e)
-    {
-        Console.WriteLine("Neplatný vstup. Ujisti se, že zadáváš dvě čísla oddělená mezerou.");
-        Console.WriteLine("Chyba: " + e);
-    }
-    
 }
-
-*/
-
