@@ -1,9 +1,11 @@
 ﻿int[] cor = new int[2];
 int size = 10;
 int mines = 20;
-
 string[,] field = new string[size, size];
 Random rnd = new Random();
+
+
+
 
 static void FinalField(int size, string[,] field)
 {
@@ -39,93 +41,31 @@ static void FinalField(int size, string[,] field)
     }
 }
 
-/// PLACING MINES
-for (int m = 0; m < mines; m++)
-{
-    int x = rnd.Next(0, size);
-    int y = rnd.Next(0, size);
-    if (field[x, y] != "*")
-    {
-        field[x, y] = "*";
-    }
-    else
-    {
-        m--;
-    }
-}
 
-/// FILL THE REST WITH DOTS
-for (int i = 0; i < size; i++)
+
+static bool searchMatrix(string[,] mat, string target)
 {
-    for (int j = 0; j < size; j++)
+
+    for (int i = 0; i < mat.GetLength(0); i++)
     {
 
-        if (field[i, j] != "*")
+        for (int j = 0; j < mat.GetLength(1); j++)
         {
-            field[i, j] = ".";
+
+            if (mat[i, j] == target)
+            {
+                return true;
+            }
         }
     }
+
+    return false;
 }
 
 
-while (true)
+
+static int[] CordsInput(int[] cor, int size)
 {
-
-    /// PLAYING FIELD
-    for (int a = 0; a < size; a++)
-    {
-        // NUMBERS
-        if (a == 0)
-        {
-            Console.Write(" ");
-            for (int b = 0; b < size; b++)
-            {
-                Console.Write(" " + b);
-            }
-            Console.WriteLine();
-        }
-        Console.Write(a + " ");
-        ///////
-        
-
-        for (int b = 0; b < size; b++)
-        {
-            if (field[a, b] == "*")
-
-            //(cor[0] != a && cor[1] != b)
-            {
-                Console.Write(". ");
-            }
-            else
-            {
-                Console.Write(field[a, b] + " ");
-            }
-            
-        }
-        Console.WriteLine();
-    }
-    /// TESTING FIELD
-    /*
-    for (int a = 0; a < size; a++)
-    {
-        if (a == 0)
-        {
-            Console.Write(" ");
-            for (int b = 0; b < size; b++)
-            {
-                Console.Write(" " + b);
-            }
-            Console.WriteLine();
-        }
-        Console.Write(a + " ");
-        for (int b = 0; b < size; b++)
-        {
-            Console.Write(field[a, b] + " ");
-        }
-        Console.WriteLine();
-    }
-    */
-    /// handling the input
     while (true)
     {
         Console.Write("Zadej číslo a sloupec (form. sloupec řádek): ");
@@ -147,8 +87,7 @@ while (true)
                 Console.WriteLine("Souřadnice mimo rozsah pole. Zkus to znovu.");
                 continue;
             }
-
-            break;
+            return cor;
         }
         catch
         {
@@ -156,17 +95,13 @@ while (true)
         }
     }
     ///
+}
 
 
 
-    if (field[cor[0], cor[1]] == "*")
-    {
-        Console.WriteLine("Prohrál jsi!");
-        FinalField(size, field);
-        break;
-    }
+static string CountAdjacentMines(int[] cor, int size, string[,] field)
+{
     int count = 0;
-
     for (int dx = -1; dx <= 1; dx++)
     {
         for (int dy = -1; dy <= 1; dy++)
@@ -184,6 +119,130 @@ while (true)
             }
         }
     }
-
-    field[cor[0], cor[1]] = count.ToString();
+    return count.ToString();
 }
+
+
+void InitField()
+{
+    for (int a = 0; a < size; a++)
+    {
+        // NUMBERS
+        if (a == 0)
+        {
+            Console.Write(" ");
+            for (int b = 0; b < size; b++)
+            {
+                Console.Write(" " + b);
+            }
+            Console.WriteLine();
+        }
+        Console.Write(a + " ");
+        ///////
+
+
+        for (int b = 0; b < size; b++)
+        {
+            if (field[a, b] == "*")
+
+            //(cor[0] != a && cor[1] != b)
+            {
+                Console.Write(". ");
+            }
+            else
+            {
+                Console.Write(field[a, b] + " ");
+            }
+
+        }
+        Console.WriteLine();
+    }
+}
+
+void PlaceMines()
+{
+    for (int m = 0; m < mines; m++)
+    {
+        int x = rnd.Next(0, size);
+        int y = rnd.Next(0, size);
+        if (field[x, y] != "*")
+        {
+            field[x, y] = "*";
+        }
+        else
+        {
+            m--;
+        }
+    }
+}
+
+
+/// PLACING MINES
+
+
+/// FILL THE REST WITH DOTS
+for (int i = 0; i < size; i++)
+{
+    for (int j = 0; j < size; j++)
+    {
+
+        if (field[i, j] != "*")
+        {
+            field[i, j] = ".";
+        }
+    }
+}
+
+
+PlaceMines();
+
+while (true)
+{
+
+    /// PLAYING FIELD
+    InitField();
+
+
+    cor = CordsInput(cor, size);
+
+
+    if (field[cor[0], cor[1]] == "*")
+    {
+        Console.WriteLine("Prohrál jste! Našlapal jste na minu!");
+        FinalField(size, field);
+        break;
+    }
+    
+    field[cor[0], cor[1]] = CountAdjacentMines(cor, size, field);
+
+
+    if (!searchMatrix(field, "."))
+    {
+        Console.WriteLine("Vyhrál jste! Odhalil jste všechna pole bez min!");
+        FinalField(size, field);
+        break;
+    }
+}
+
+
+/// TESTING FIELD -- used if you need to see where mines are placed
+/*
+for (int a = 0; a < size; a++)
+{
+    if (a == 0)
+    {
+        Console.Write(" ");
+        for (int b = 0; b < size; b++)
+        {
+            Console.Write(" " + b);
+        }
+        Console.WriteLine();
+    }
+    Console.Write(a + " ");
+    for (int b = 0; b < size; b++)
+    {
+        Console.Write(field[a, b] + " ");
+    }
+    Console.WriteLine();
+}
+*/
