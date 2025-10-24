@@ -1,0 +1,14 @@
+C:\skolacijak\ostrece\minesweeper\minesweeper\bin\Debug\net8.0\minesweeper.exe
+C:\skolacijak\ostrece\minesweeper\minesweeper\bin\Debug\net8.0\minesweeper.deps.json
+C:\skolacijak\ostrece\minesweeper\minesweeper\bin\Debug\net8.0\minesweeper.runtimeconfig.json
+C:\skolacijak\ostrece\minesweeper\minesweeper\bin\Debug\net8.0\minesweeper.dll
+C:\skolacijak\ostrece\minesweeper\minesweeper\bin\Debug\net8.0\minesweeper.pdb
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.GeneratedMSBuildEditorConfig.editorconfig
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.AssemblyInfoInputs.cache
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.AssemblyInfo.cs
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.csproj.CoreCompileInputs.cache
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.dll
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\refint\minesweeper.dll
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.pdb
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\minesweeper.genruntimeconfig.cache
+C:\skolacijak\ostrece\minesweeper\minesweeper\obj\Debug\net8.0\ref\minesweeper.dll
