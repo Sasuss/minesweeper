@@ -90,7 +90,9 @@ while (true)
 
         for (int b = 0; b < size; b++)
         {
-            if (field[a, b] == "*" && (cor[0] != a && cor[1] != b))
+            if (field[a, b] == "*")
+
+            //(cor[0] != a && cor[1] != b)
             {
                 Console.Write(". ");
             }
@@ -98,11 +100,12 @@ while (true)
             {
                 Console.Write(field[a, b] + " ");
             }
-
+            
         }
         Console.WriteLine();
     }
     /// TESTING FIELD
+    /*
     for (int a = 0; a < size; a++)
     {
         if (a == 0)
@@ -121,7 +124,7 @@ while (true)
         }
         Console.WriteLine();
     }
-
+    */
     /// handling the input
     while (true)
     {
@@ -162,4 +165,25 @@ while (true)
         FinalField(size, field);
         break;
     }
+    int count = 0;
+
+    for (int dx = -1; dx <= 1; dx++)
+    {
+        for (int dy = -1; dy <= 1; dy++)
+        {
+            if (dx == 0 && dy == 0)
+                continue;
+
+            int nx = cor[0] + dx; // open ai helped me make this work
+            int ny = cor[1] + dy;
+
+            if (nx >= 0 && nx < size && ny >= 0 && ny < size)
+            {
+                if (field[nx, ny] == "*")
+                    count++;
+            }
+        }
+    }
+
+    field[cor[0], cor[1]] = count.ToString();
 }
